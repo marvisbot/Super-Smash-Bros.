@@ -271,7 +271,7 @@ public class PhysicsObject extends JPanel {
 
 			}
 			if(this.lastX >= temp.getPlatX() && this.lastX<=temp.getPlatX()+temp.getPlatWidth()) {
-				if(this.lastY <= temp.getPlatY()) {//+ this.objectH 
+				if(this.lastY+this.objectH <= temp.getPlatY()) {//+ this.objectH 
 					if(this.lastY + this.objectH+(fallSpeed * fallingTime)>= temp.getPlatY()) {
 						this.lastY = temp.getPlatY()-this.objectH;
 						if(!temp.specialPlat)
