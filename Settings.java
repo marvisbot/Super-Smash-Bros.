@@ -2,34 +2,45 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
 
-public class HowToPlayMenu implements KeyListener {	//KeyListener is like ActionListener but for keyboard
+public class Settings implements KeyListener {	//KeyListener is like ActionListener but for keyboard
 	private int rectX,rectY,rectWidth,rectHeight;
 	private int currentSelection = 0;
 	private final int height = 600;	//Window dimensions
 	private final int width = 900;
 	private int pageNumber = 1;
+	public static int currentChoiceMusic = 0, currentChoiceEffects=2;
+
 	private int[][] buttonBoundsX = {
-			{48, 175},
-			{668, 175}
+
+			{288, 136},
+			{450, 136},
+			{287, 136},
+			{452, 136},
+			{348, 175},
 
 	};
 	private int[][] buttonBoundsY = {
-			{488, 69},
-			{488, 69}
+
+			{215, 65},
+			{215, 65},
+			{379, 65},
+			{379, 65},
+			{489, 69},
 	};
 
 	private boolean closed = false;
-	private Image backgroundImg  = Toolkit.getDefaultToolkit().createImage("MOVEMENTCONTROLS.png").getScaledInstance(width, height,java.awt.Image.SCALE_SMOOTH);
+	private Image backgroundImg  = Toolkit.getDefaultToolkit().createImage("SettingsMenuImage.png").getScaledInstance(width, height,java.awt.Image.SCALE_SMOOTH);
 
 	private JFrame frame;	
 	private JPanel panel = new canvas();	
 
-	public HowToPlayMenu() {
+	public Settings() {
 
 		setDrawnSelection();
-		frame = new JFrame("Super Smash");	//Frame stuff
+		frame = new JFrame("Settings");	//Frame stuff
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(width, height);
 		frame.setResizable(false);
@@ -73,28 +84,20 @@ public class HowToPlayMenu implements KeyListener {	//KeyListener is like Action
 			currentSelection--;
 			setDrawnSelection();
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_RIGHT&&currentSelection < 1) {
+		else if(e.getKeyCode() == KeyEvent.VK_RIGHT&&currentSelection < 4) {
 			currentSelection++;
 			setDrawnSelection();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if(currentSelection==0 && pageNumber == 1) {
-				closed = true;
+			if(currentSelection==4) {
 				new mainMenu();
+				frame.dispose();
+			}	
+			else if(currentSelection <= 1) {
+				currentChoiceMusic = currentSelection;
 			}
-			else if(currentSelection ==0 && pageNumber == 2) {
-				backgroundImg = Toolkit.getDefaultToolkit().createImage("MOVEMENTCONTROLS.png").getScaledInstance(width, height,java.awt.Image.SCALE_SMOOTH);
-				pageNumber = 1;
-			}
-			else if(currentSelection==1 && pageNumber == 1) {
-
-				backgroundImg = Toolkit.getDefaultToolkit().createImage("AttackControls.png").getScaledInstance(width, height,java.awt.Image.SCALE_SMOOTH);
-				pageNumber = 2;
-				currentSelection =0;
-				setDrawnSelection();
-			}else if(pageNumber == 2 && currentSelection==1) {
-				closed = true;
-				new mainMenu();
+			else if(currentSelection> 1) {
+				currentChoiceEffects = currentSelection;
 			}
 
 		}
@@ -105,7 +108,7 @@ public class HowToPlayMenu implements KeyListener {	//KeyListener is like Action
 	}
 
 	public static void main(String[] args) {	//Call the graphics constructor
-		new HowToPlayMenu();
+		new Settings();
 	}
 
 
@@ -115,7 +118,16 @@ public class HowToPlayMenu implements KeyListener {	//KeyListener is like Action
 			super.paintComponent(g);	//Call paintComponent from the overlord JPanel
 			g.setColor(new Color(200, 0,0));
 			g.drawImage(backgroundImg,0,0, null);
+			g.setColor(new Color(0,0,255));
 
+			g.drawRect(buttonBoundsX[currentChoiceMusic][0], buttonBoundsY[currentChoiceMusic][0], buttonBoundsX[currentChoiceMusic][1], buttonBoundsY[currentChoiceMusic][1]);
+			g.drawRect(buttonBoundsX[currentChoiceMusic][0]+1, buttonBoundsY[currentChoiceMusic][0]+1, buttonBoundsX[currentChoiceMusic][1]-2, buttonBoundsY[currentChoiceMusic][1]-2);
+			g.drawRect(buttonBoundsX[currentChoiceMusic][0]-1, buttonBoundsY[currentChoiceMusic][0]-1, buttonBoundsX[currentChoiceMusic][1]+2, buttonBoundsY[currentChoiceMusic][1]+2);
+
+			g.drawRect(buttonBoundsX[currentChoiceEffects][0], buttonBoundsY[currentChoiceEffects][0], buttonBoundsX[currentChoiceEffects][1], buttonBoundsY[currentChoiceEffects][1]);
+			g.drawRect(buttonBoundsX[currentChoiceEffects][0]+1, buttonBoundsY[currentChoiceEffects][0]+1, buttonBoundsX[currentChoiceEffects][1]-2, buttonBoundsY[currentChoiceEffects][1]-2);
+			g.drawRect(buttonBoundsX[currentChoiceEffects][0]-1, buttonBoundsY[currentChoiceEffects][0]-1, buttonBoundsX[currentChoiceEffects][1]+2, buttonBoundsY[currentChoiceEffects][1]+2);
+			g.setColor(new Color(255,0,0));
 			g.drawRect(rectX, rectY, rectWidth, rectHeight);
 			g.drawRect(rectX+1, rectY+1, rectWidth-2, rectHeight-2);
 			g.drawRect(rectX-1, rectY-1, rectWidth+2, rectHeight+2);

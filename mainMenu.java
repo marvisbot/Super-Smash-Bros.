@@ -87,7 +87,7 @@ public class mainMenu implements KeyListener {	//KeyListener is like ActionListe
 			closed = true;
 			if(currentSelection==0)new ChooseCharacterMenu();
 			else if(currentSelection==1) new HowToPlayMenu();
-			else if(currentSelection==2) ;
+			else if(currentSelection==2) new Settings();
 			else System.out.println("Houston we have a problem with the selection");
 		}
 		
