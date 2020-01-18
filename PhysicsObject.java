@@ -14,7 +14,7 @@ public class PhysicsObject extends JPanel {
 	private long tempTime;	//How long player has been "dead" for, so they can be respawned after a certain duration has passed
 
 	private double totalDamage;
-	
+
 	private int objectW;	//Object dimensions
 	private int objectH;
 
@@ -59,9 +59,9 @@ public class PhysicsObject extends JPanel {
 	private Platform platform;
 
 	private Image img;	//The image used for this player object
-	
+
 	private int frameNum; 	//The frame number used to play death effect frame by frame
-	
+
 	private int blocking;
 
 	public PhysicsObject(String file, String weaponName, String heavyWeaponName, String projectileName, boolean melee, int x, int y, int width, int height, double mass, int runSpeed) {
@@ -80,7 +80,7 @@ public class PhysicsObject extends JPanel {
 
 		this.melee = melee;
 		this.weapon = new MeleeWeapon(weaponName, melee, lastX-(objectW/2), lastY+(objectH/2), 40, 40, 2, 0.1, 10);
-		
+
 		this.projectileName = projectileName;
 		this.weaponName = weaponName.substring(0, weaponName.length()-4);
 		this.heavyWeaponName = heavyWeaponName;
@@ -106,7 +106,7 @@ public class PhysicsObject extends JPanel {
 		this.damageTaken = 0;
 
 		this.frameNum = 1;
-		
+
 		this.blocking = 1;
 
 		try { this.img = ImageIO.read(new File(file));
@@ -121,7 +121,7 @@ public class PhysicsObject extends JPanel {
 			if(this.lastX > Physics.width+75 || this.lastX < -75 || this.lastY > Physics.height+20) {
 				this.numDeath++;
 				tempTime = System.currentTimeMillis();
-				
+
 				deadRightNow=true;
 			}
 
@@ -218,7 +218,7 @@ public class PhysicsObject extends JPanel {
 			damagePercentage = Math.round(((damageTaken/2.0)*100)*100)/100;
 
 			gg.drawImage(img, lastX, lastY, null);
-			
+
 			if(playerNumber == 1) {
 				gg.drawImage(Physics.imageMap.get(characterName), Physics.width-(600), Physics.height-70, null);
 				gg.drawString(Long.toString(Math.round(((damageTaken/2.0)*100)*100)/100)+"%", Physics.width-600, Physics.height-70);
@@ -234,19 +234,8 @@ public class PhysicsObject extends JPanel {
 		}
 		else if(numDeath > 3) {
 			Physics.paused = true;
-
-			int goOrNot = JOptionPane.showConfirmDialog(Physics.frame,
-					"You Died Three Times. Exit?",
-					"Game Over",
-					JOptionPane.YES_NO_OPTION);
-
-			if(goOrNot == 0) {
-				new EndScreen();
-				//System.exit(0);
-			}
-			else Physics.quit = true;
-
-			System.out.println(goOrNot);
+			Physics.quit = true;
+			new EndScreen();
 		}
 		else if(this.tempTime+1000<System.currentTimeMillis()) {	//Respawn the player at the top of the screen
 			lastX = ThreadLocalRandom.current().nextInt(100, 750 + 1);
@@ -333,21 +322,24 @@ public class PhysicsObject extends JPanel {
 
 					platform = temp;	//Set the current platform as the one being stepped on
 
-					if(temp.getPlatY() <= lastY+objectH && (temp.getPlatY()+temp.getPlatHeight()) >= lastY+objectH) {
-						if(!temp.getSpecialPlat())
-							return true;
+					if(temp.getPlatX() <= lastX + objectW && temp.getPlatX()+temp.getPlatWidth() >= lastX) {
+						if(temp.getPlatY() <= lastY+objectH && (temp.getPlatY()+temp.getPlatHeight()) >= lastY+objectH) {
+							if(!temp.specialPlat) {
+								platform = temp;
+								return true;
+							}
+						}
 					}
-					
 					if(this.lastX >= temp.getPlatX() && this.lastX<=temp.getPlatX()+temp.getPlatWidth()) {
 						if(this.lastY+this.objectH <= temp.getPlatY()) {//+ this.objectH 
 							if(this.lastY + this.objectH+(fallSpeed * fallingTime)>= temp.getPlatY()) {
 								this.lastY = temp.getPlatY()-this.objectH;
-								if(!temp.getSpecialPlat())
+								if(!temp.specialPlat)
 									return true;
 							}
 						}
 					}
-					
+
 					if(temp.getHanging() && fallSpeed>=0 && temp.getOccupant()==null) { //Operations for if or if not someone else is hanging on
 						hanging = true;
 						moveSpeed = 0;
@@ -374,11 +366,11 @@ public class PhysicsObject extends JPanel {
 		}
 		return false;
 	}
-	
+
 	public boolean checkIfOnSpecial() {
 		for(int i = 0; i < Physics.platformList.size(); i++) {
 			Platform temp =Physics.platformList.get(i);
-			if(temp.getSpecialPlat()) {
+			if(temp.specialPlat) {
 				System.out.println("special");
 				if(this.lastX +this.objectW>temp.getPlatX()&& this.lastX<temp.getPlatX()+temp.getPlatWidth()) {
 					if(this.lastY< temp.getPlatY()+temp.getPlatHeight()&&this.lastY > temp.getPlatY()+200) {//&&this.lastY+this.objectH<=temp.getPlatY()+temp.getPlatHeight()
@@ -394,13 +386,13 @@ public class PhysicsObject extends JPanel {
 		if(!hanging) {
 			if(block) blocking = 2;
 			else blocking = 1;
-			
+
 			if(!melee && attack && fireTime+400<System.currentTimeMillis()) {	//With projectile				
 				Physics.playSound(projectileName);
-				
+
 				if(orientation>0 && projectileName.equals("arrow")) Physics.projectileList.add(new ProjectileWeapon("arrowFlipped", this, lastX-(objectW/2), lastY+(objectH/8), 50, 30, 0.2, 10, orientation));
 				else Physics.projectileList.add(new ProjectileWeapon(projectileName, this, lastX-(objectW/2), lastY+(objectH/8), 50, 30, 0.2, 10, orientation));
-				
+
 				fireTime = System.currentTimeMillis();
 			}
 			if(!melee && heavy && fireTime + 300<System.currentTimeMillis()) {
@@ -417,11 +409,11 @@ public class PhysicsObject extends JPanel {
 			if(melee && heavy && fireTime + 300<System.currentTimeMillis()) {
 				if(!swingWeapon) Physics.playSound(weaponName);
 				swingWeapon = true;
-				
+
 				if(orientation<0) weapon.setImg(Physics.imageMap.get("axe"));
 				else weapon.setImg(Physics.flip(Physics.toBufferedImage(Physics.imageMap.get("axe"))));
 				weapon.doubleDamage(true);
-				
+
 				fireTime = System.currentTimeMillis();
 			}
 			if(melee && !heavy) {
@@ -488,15 +480,15 @@ public class PhysicsObject extends JPanel {
 	public void setPlayerNumber(int num) {
 		playerNumber = num;
 	}
-	
+
 	public void stopBlocking() {
 		blocking = 1;
 	}
-	
+
 	public int getNumDeaths() {
 		return numDeath;
 	}
-	
+
 	public double getTotalDamage() {
 		return totalDamage;
 	}
