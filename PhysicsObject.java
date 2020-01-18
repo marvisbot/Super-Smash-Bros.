@@ -197,7 +197,7 @@ public class PhysicsObject extends JPanel {
 				}
 			}
 
-			if(orientation<0) {
+			if(orientation<0) {	//Change position of weapon depending on which way the player is facing
 				weapon.setX(lastX-objectW);
 				weapon.setY(lastY+(objectH/2));
 			}
@@ -232,7 +232,7 @@ public class PhysicsObject extends JPanel {
 
 			gg.drawString("Player " + playerNumber, lastX, lastY-10);
 		}
-		else if(numDeath > 3) {
+		else if(numDeath > 3) {	//Game over after one of the players have died three times
 			Physics.paused = true;
 			Physics.quit = true;
 			new EndScreen();
@@ -288,7 +288,7 @@ public class PhysicsObject extends JPanel {
 			falling = true;
 		}
 
-		if(hanging) {
+		if(hanging) {	//Jumping stops hanging
 			hangingPlatform.setOccupant(null);
 			hangingPlatform = null;
 			hanging = false;
@@ -367,7 +367,7 @@ public class PhysicsObject extends JPanel {
 		return false;
 	}
 
-	public boolean checkIfOnSpecial() {
+	public boolean checkIfOnSpecial() {	//Check if currently standing on special platform
 		for(int i = 0; i < Physics.platformList.size(); i++) {
 			Platform temp =Physics.platformList.get(i);
 			if(temp.specialPlat) {
@@ -382,7 +382,9 @@ public class PhysicsObject extends JPanel {
 		return false;
 	}
 
-	public void swingWeapon(boolean block, boolean attack, boolean heavy) {	//Attack with this object, whether with melee or with projectile
+	//Attack with this object, whether with melee or with projectile
+	//Returns nothing, parameters describe which kind of attack is being used
+	public void swingWeapon(boolean block, boolean attack, boolean heavy) {	
 		if(!hanging) {
 			if(block) blocking = 2;
 			else blocking = 1;
@@ -423,7 +425,8 @@ public class PhysicsObject extends JPanel {
 			}
 		}
 	}
-
+	
+	//Parameters are the amount of damage and the object to do it to
 	public void dealDamage(double damage, PhysicsObject o) {	//Deal damage the object that has been hit
 		o.moveSpeed += ((o.damagePercentage/3)*damage) * this.orientation / blocking;	//Push object right
 		if(o.damagePercentage < 90) o.fallSpeed -= (1.5*(o.damagePercentage/3)*damage) / blocking;	//Push object up 
