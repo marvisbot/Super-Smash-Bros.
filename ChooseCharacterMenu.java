@@ -95,6 +95,7 @@ public class ChooseCharacterMenu implements KeyListener {	//KeyListener is like 
 		drawSquares.start();	//Start the main loop
 
 	}
+	//sets current object to highlight
 	private void setDrawnSelection() {
 		rectX = imageBoundsX[currentSelection][0];
 		rectY = imageBoundsY[currentSelection][0]-20;
@@ -165,6 +166,7 @@ public class ChooseCharacterMenu implements KeyListener {	//KeyListener is like 
 			setDrawnSelection();
 		}
 	}
+	//picks a random player
 	public void randomPlayer() {
 		double h = Math.random()*7;
 		int tempSelect =(int) h;
