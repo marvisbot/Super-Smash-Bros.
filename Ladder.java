@@ -18,13 +18,14 @@ public class Ladder  {
 	public int getLadHeight() {
 		return height;
 	}
+	//constructors
 	public Ladder(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 	}
-	
+	//returns a rectangle with the platform's bounds
 	public Rectangle getBounds() {
 		return new Rectangle(this.x, this.y, this.width, this.height);
 	}
