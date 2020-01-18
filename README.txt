@@ -19,3 +19,6 @@ However, we were able to add in extra features such as the lightning effect
 when a character gets taken out, being able to fall down to the platform
 below, as well as an end screen after the game is over to show each player's
 stats. 
+
+Known Bugs:
+Unfinished end (stats) screen 
