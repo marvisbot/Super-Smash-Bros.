@@ -9,6 +9,9 @@ public class Platform { //extends JPanel
 	boolean specialPlat;
 	private PhysicsObject occupant;
 
+	//Constructor parameters: x and y coordinates of top left corner, width and height of the platform, whether this platform 
+	//is used for hanging, and if so, is platform on right or left, and finally if this platform is used for special purposes
+	//for example ladders
 	public Platform(int x, int y, int width, int height, boolean hanging, boolean right, boolean special) {
 		this.y = y;
 		this.x = x;
