@@ -23,6 +23,8 @@ public class ChooseCharacterMenu implements KeyListener {	//KeyListener is like 
 	private int[][] imageBoundsY = new int[][] {
 		{84, 121},{84,121},{84,121},{84,121},{84,121}, {206,122}, {206,122}, {206, 122}, {206,123}
 	};//Order: Mario, Donkey Kong, Link, Samus, Yoshi, Kirby, Fox, Pikachu, Random
+	
+	//Load in image screens for both players 
 	private Image[] p1images = new Image[] {
 			Toolkit.getDefaultToolkit().createImage("p1ScreenMario.png"),
 			Toolkit.getDefaultToolkit().createImage("p1ScreenDonkey.png"),
@@ -55,7 +57,8 @@ public class ChooseCharacterMenu implements KeyListener {	//KeyListener is like 
 	public ChooseCharacterMenu() {
 		String fName = "superFont.ttf";
 		File fontFile = new File(fName);		
-
+		
+		//Load in fonts
 		try {
 			Font tempfont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 			font = tempfont.deriveFont((float)(40));
@@ -105,12 +108,9 @@ public class ChooseCharacterMenu implements KeyListener {	//KeyListener is like 
 	}
 
 
-	@Override
-	public void keyTyped(KeyEvent e) {
+	public void keyTyped(KeyEvent e) {}
 
-	}
-
-	@Override
+	//Controls for going through character list
 	public void keyPressed(KeyEvent e) {
 		if(playerNumber<3) {
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -189,13 +189,8 @@ public class ChooseCharacterMenu implements KeyListener {	//KeyListener is like 
 		}
 
 	}
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-
+	public void keyReleased(KeyEvent e) {}
+	
 	public class canvas extends JPanel {	//Make a new JPanel that you can draw objects onto (Can't draw stuff anywhere you want onto normal JPanels)
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);	//Call paintComponent from the overlord JPanel
