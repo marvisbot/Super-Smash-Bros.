@@ -7,7 +7,6 @@ import java.util.Collections;
 
 
 public class mapSettings implements KeyListener {	//KeyListener is like ActionListener but for keyboard
-	private int rectX,rectY,rectWidth,rectHeight;
 	private int currentSelection = 0;
 	private final int height = 600;	//Window dimensions
 	private final int width = 900;
@@ -40,7 +39,6 @@ public class mapSettings implements KeyListener {	//KeyListener is like ActionLi
 
 	public mapSettings() {
 
-		setDrawnSelection();
 		frame = new JFrame("Settings");	//Frame stuff
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(width, height);
@@ -67,13 +65,7 @@ public class mapSettings implements KeyListener {	//KeyListener is like ActionLi
 		updateMenu.start();	//Start the main loop
 
 	}
-	private void setDrawnSelection() {
-		rectX = buttonBoundsX[currentSelection][0];
-		rectY = buttonBoundsY[currentSelection][0];
-		rectWidth = buttonBoundsX[currentSelection][1];
-		rectHeight = buttonBoundsY[currentSelection][1];
-
-	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 
@@ -83,11 +75,10 @@ public class mapSettings implements KeyListener {	//KeyListener is like ActionLi
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_LEFT && currentSelection > 0) {
 			currentSelection--;
-			setDrawnSelection();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_RIGHT&&currentSelection < 4) {
 			currentSelection++;
-			setDrawnSelection();
+//			setDrawnSelection();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if(currentSelection==4) {
@@ -126,12 +117,6 @@ public class mapSettings implements KeyListener {	//KeyListener is like ActionLi
 	@Override
 	public void keyReleased(KeyEvent e) {
 	}
-
-	public static void main(String[] args) {	//Call the graphics constructor
-		new mapSettings();
-	}
-
-
 
 	public class canvas extends JPanel {	//Make a new JPanel that you can draw objects onto (Can't draw stuff anywhere you want onto normal JPanels)
 		public void paintComponent(Graphics g) {

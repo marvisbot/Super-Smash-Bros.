@@ -104,9 +104,6 @@ public class HowToPlayMenu implements KeyListener {	//KeyListener is like Action
 	public void keyReleased(KeyEvent e) {
 	}
 
-	public static void main(String[] args) {	//Call the graphics constructor
-		new HowToPlayMenu();
-	}
 
 
 

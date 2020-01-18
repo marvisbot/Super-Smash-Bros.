@@ -37,11 +37,8 @@ public class Map{ //extends JPanel
 		
 		
 	}
-	public void drawDiff(Graphics g, int x, int y) {
-		Graphics2D gg = (Graphics2D) g;
-	}
+	
 	public void draw(Graphics g, int x, int y, int width, int height) {
-		Graphics2D gg = (Graphics2D) g;		
 		g.drawImage(backgroundImage, x, y, width, height, null);
 	}
 	

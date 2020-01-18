@@ -26,12 +26,12 @@ public class ChooseMapMenu implements KeyListener {	//KeyListener is like Action
 	public JFrame frame;	
 	private JPanel panel = new canvas();	
 	public static Map[] allMapArray = new Map[] {//Toolkit.getDefaultToolkit().createImage("FINALDESTINATION.png").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH),
-			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP0.png").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(140, 320 ,610, 5, false)}, 1, "FInAl DEstInAtIOn"),		
-			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP1.png").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(388, 205 ,120, 5, false),new Platform(250, 290 ,120, 5, false),new Platform(529, 291 ,120, 5, false),new Platform(203, 370 ,490, 5, false)}, 1, "SUnrIsE"),		
-			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP2.png").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(400, 92 ,101, 5, false),new Platform(280, 170 ,102, 5, false),new Platform(519, 170 ,102, 5, false),new Platform(400, 245 ,101, 5, false),new Platform(158, 245 ,107, 5, false),new Platform(637, 245 ,105, 5, false),new Platform(100, 315 ,700, 5, false)}, 2, "BIg BAttlEfIEld"),	
-			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP3.jpg").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(215, 370 ,158, 5, false),new Platform(216, 460 ,465, 5, false),new Platform(371, 266 ,310, 5, false),new Platform(217, 164 ,465, 5, false),new Platform(217, 64 ,153, 5, false),new Platform(528, 64 ,156, 5, false)}, 4, "WrEcKiNG cReW"),		
-			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP4.png").getScaledInstance(width, height-20, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(85, 220 ,160, 5, false),new Platform(30, 450 ,120, 5, false),new Platform(632, 255 ,268, 5, false),new Platform(405, 375 ,495, 5, false), new Platform(150, 190, 50, 240, true)}, 5, "SUzAkU CAstlE"),		
-			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP5.png").getScaledInstance(width, height-20, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(65, 245 ,196, 5, false),new Platform(640, 245 ,196, 5, false),new Platform(194, 350 ,170, 5, false),new Platform(530, 345 ,172, 5, false),new Platform(324, 445 ,250, 5, false)}, 3, "NOrfAIr"),		
+			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP0.png").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(140, 320 ,610, 5, false, false,false)}, 1, "FInAl DEstInAtIOn"),		
+			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP1.png").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(388, 205 ,120, 5,false, false, false),new Platform(250, 290 ,120, 5, false, false,false),new Platform(529, 291 ,120, 5, false, false,false),new Platform(203, 370 ,490, 5, false, false,false)}, 1, "SUnrIsE"),		
+			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP2.png").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(400, 92 ,101, 5, false, false,false),new Platform(280, 170 ,102, 5, false, false,false),new Platform(519, 170 ,102, 5, false, false,false),new Platform(400, 245 ,101, 5, false, false,false),new Platform(158, 245 ,107, 5, false, false,false),new Platform(637, 245 ,105, 5, false, false,false),new Platform(100, 315 ,700, 5, false, false,false)}, 2, "BIg BAttlEfIEld"),	
+			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP3.jpg").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(215, 370 ,158, 5, false, false,false),new Platform(216, 460 ,465, 5, false, false,false),new Platform(371, 266 ,310, 5, false, false,false),new Platform(217, 164 ,465, 5,false, false, false),new Platform(217, 64 ,153, 5, false, false,false),new Platform(528, 64 ,156, 5, false, false,false)}, 4, "WrEcKiNG cReW"),		
+			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP4.png").getScaledInstance(width, height-20, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(85, 220 ,160, 5, false, false,false),new Platform(30, 450 ,120, 5,false, false, false),new Platform(632, 255 ,268, 5, false, false,false),new Platform(405, 375 ,495, 5,false, false, false), new Platform(150, 190, 50, 240,false, false, true)}, 5, "SUzAkU CAstlE"),		
+			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP5.png").getScaledInstance(width, height-20, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(65, 245 ,196, 5, false, false,false),new Platform(640, 245 ,196, 5, false, false,false),new Platform(194, 350 ,170, 5,false, false, false),new Platform(530, 345 ,172, 5, false, false,false),new Platform(324, 445 ,250, 5, false, false,false)}, 3, "NOrfAIr"),		
 
 	};
 	public ChooseMapMenu() {
@@ -68,9 +68,21 @@ public class ChooseMapMenu implements KeyListener {	//KeyListener is like Action
 					try {Thread.sleep(17);} catch (Exception ex) {}	//10 millisecond delay between each refresh
 					
 				}
+				
+				
+				
 				new Physics();
+				System.out.println("yeah");
+				Physics.soundMap.get("main theme").stop();
+				System.out.println("yeah1");
+				Physics.soundMap.clear();
+				System.out.println("yeah2");
+				Physics.playSound("gong");
+			
+				System.out.println("yeah3");
 				System.out.println(ended);
 				frame.dispose();
+				
 			}
 		});	
 		drawSquares.start();	//Start the main loop
@@ -84,9 +96,10 @@ public class ChooseMapMenu implements KeyListener {	//KeyListener is like Action
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyCode()+" "+KeyEvent.VK_ENTER);
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			if(!onSettings) {
+				Physics.playSound("menuRight");
+
 				if(currentSelection < 5) {
 					currentSelection++;
 				}
@@ -102,6 +115,7 @@ public class ChooseMapMenu implements KeyListener {	//KeyListener is like Action
 				if(prevSelection-1>=0) {
 					prevPrevSelection = prevSelection-1;
 				} else prevPrevSelection =5;
+				
 			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_UP) {
@@ -112,6 +126,7 @@ public class ChooseMapMenu implements KeyListener {	//KeyListener is like Action
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 			if(!onSettings) {
+				Physics.playSound("menuLeft");
 				if(currentSelection > 0) 
 					currentSelection--;
 				else currentSelection = 5;
@@ -158,12 +173,7 @@ public class ChooseMapMenu implements KeyListener {	//KeyListener is like Action
 		panel.repaint();
 	}
 
-	public static void main(String[] args) {	//Call the graphics constructor
-		new ChooseMapMenu();
-	}
-
-
-
+	
 	public class canvas extends JPanel {	//Make a new JPanel that you can draw objects onto (Can't draw stuff anywhere you want onto normal JPanels)
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);	//Call paintComponent from the overlord JPanel

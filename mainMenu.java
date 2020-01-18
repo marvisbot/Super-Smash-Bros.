@@ -76,14 +76,20 @@ public class mainMenu implements KeyListener {	//KeyListener is like ActionListe
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_DOWN && currentSelection < 2) {
+			Physics.playSound("menuLeft");
 			currentSelection++;
+			
 			setDrawnSelection();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_UP&&currentSelection > 0) {
+			Physics.playSound("menuRight");
+
 			currentSelection--;
 			setDrawnSelection();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			Physics.playSound("menuSelect");
+
 			closed = true;
 			if(currentSelection==0)new ChooseCharacterMenu();
 			else if(currentSelection==1) new HowToPlayMenu();

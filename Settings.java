@@ -11,7 +11,7 @@ public class Settings implements KeyListener {	//KeyListener is like ActionListe
 	private final int height = 600;	//Window dimensions
 	private final int width = 900;
 	private int pageNumber = 1;
-	public static int currentChoiceMusic = 0, currentChoiceEffects=2;
+	public static int currentChoiceMusic = 0, currentChoiceEffects=2, prevChoiceMusic = 0;
 
 	private int[][] buttonBoundsX = {
 
@@ -94,6 +94,7 @@ public class Settings implements KeyListener {	//KeyListener is like ActionListe
 				frame.dispose();
 			}	
 			else if(currentSelection <= 1) {
+				prevChoiceMusic = currentChoiceMusic;
 				currentChoiceMusic = currentSelection;
 			}
 			else if(currentSelection> 1) {
@@ -107,9 +108,6 @@ public class Settings implements KeyListener {	//KeyListener is like ActionListe
 	public void keyReleased(KeyEvent e) {
 	}
 
-	public static void main(String[] args) {	//Call the graphics constructor
-		new Settings();
-	}
 
 
 

@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -22,23 +21,41 @@ public class runThisFirst implements KeyListener {	//KeyListener is like ActionL
 		Image image = icon.getImage().getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
 		JLabel pic = new JLabel(new ImageIcon(image));
 		panel.add(pic);
-
-
+		
 		frame.add(panel);
 
 		frame.setLocationRelativeTo(null);	//Make the frame visible
-		frame.setVisible(true);		
+		frame.setVisible(true);
+		
+		Physics.playSound("main theme");
+		Thread checkMusic = new Thread(new Runnable() {	//The main loop
+			public void run() {	
+
+				while (!Physics.quit) {	
+					if(Settings.currentChoiceMusic != Settings.prevChoiceMusic) {
+						
+						if(Settings.currentChoiceMusic ==0) {
+							Physics.soundMap.get("main theme").start();
+						}else {
+							Physics.soundMap.get("main theme").stop();
+
+						}
+					}
+					try {Thread.sleep(17);} catch (InterruptedException e) {
+					}
+				}
+
+				
+			}
+		});	
+		checkMusic.start();
 	}
 
-
-
-
 	public void keyTyped(KeyEvent e) {}	//KeyListener is an interface so must implement all empty methods, this one is just useless
-
+ 
 	public void keyPressed(KeyEvent e) {	//When the keys are pressed (when they're released is the method after this one)
-		
-				new mainMenu();
-				frame.dispose();
+		new mainMenu();
+		frame.dispose();
 	}
 
 	public void keyReleased(KeyEvent e) {}
@@ -46,10 +63,4 @@ public class runThisFirst implements KeyListener {	//KeyListener is like ActionL
 	public static void main(String[] args) {	//Call the graphics constructor
 		new runThisFirst();
 	}
-
-
-
-
-
-
 }
