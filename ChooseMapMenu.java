@@ -25,6 +25,8 @@ public class ChooseMapMenu implements KeyListener {	//KeyListener is like Action
 	//CENTER OF SCREEN IS 450
 	public JFrame frame;	
 	private JPanel panel = new canvas();	
+	
+	//Store the location of platforms for each map
 	public static Map[] allMapArray = new Map[] {//Toolkit.getDefaultToolkit().createImage("FINALDESTINATION.png").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH),
 			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP0.png").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(140, 320 ,610, 5, false, false,false)}, 1, "FInAl DEstInAtIOn"),		
 			new Map(Toolkit.getDefaultToolkit().createImage("SMASHMAP1.png").getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH), new Platform[] {new Platform(388, 205 ,120, 5,false, false, false),new Platform(250, 290 ,120, 5, false, false,false),new Platform(529, 291 ,120, 5, false, false,false),new Platform(203, 370 ,490, 5, false, false,false)}, 1, "SUnrIsE"),		
@@ -35,14 +37,13 @@ public class ChooseMapMenu implements KeyListener {	//KeyListener is like Action
 
 	};
 	public ChooseMapMenu() {
-//		Arrays.sort(allMapArray, new SortByIncreasingDifficulty());
 		frame = new JFrame("Choose Your Map");	//Frame stuff
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(width, height);
 		frame.setResizable(false);
 		frame.addKeyListener(this);
 
-		String fName = "superFont.ttf";
+		String fName = "superFont.ttf";	//Load in font file
 		File fontFile = new File(fName);		
 
 		try {
@@ -89,12 +90,9 @@ public class ChooseMapMenu implements KeyListener {	//KeyListener is like Action
 
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
+	public void keyTyped(KeyEvent e) {}
 
-	}
-
-	@Override
+	//Key events for going through the list of menus
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			if(!onSettings) {
@@ -157,22 +155,15 @@ public class ChooseMapMenu implements KeyListener {	//KeyListener is like Action
 				frame.dispose();
 			}
 		}
-
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+	public void keyReleased(KeyEvent e) {}
 
-	}
-
-
-	public void clearAll() {
+	public void clearAll() {	//Clear all components from panel
 		panel.removeAll();
 		panel.revalidate();
 		panel.repaint();
 	}
-
 	
 	public class canvas extends JPanel {	//Make a new JPanel that you can draw objects onto (Can't draw stuff anywhere you want onto normal JPanels)
 		public void paintComponent(Graphics g) {
