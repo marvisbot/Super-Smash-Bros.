@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class EndScreen implements KeyListener {	//KeyListener is like ActionListener but for keyboard
-	public PhysicsObject winner, loser;
+	public static String winner, loser;
 	private int rectX,rectY,rectWidth,rectHeight;
 	private int currentSelection = 0;
 	private final int height = 600;	//Window dimensions
@@ -28,7 +28,9 @@ public class EndScreen implements KeyListener {	//KeyListener is like ActionList
 	private JFrame frame;	
 	private JPanel panel = new canvas();	
 
-	public EndScreen() {
+	public EndScreen(String winner, String loser) {
+		this.winner=winner;
+		this.loser = loser;
 		String fName = "superFont.ttf";
 		File fontFile = new File(fName);		
 
@@ -79,8 +81,7 @@ public class EndScreen implements KeyListener {	//KeyListener is like ActionList
 	public void keyPressed(KeyEvent e) {
 
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-			Physics.playSound("menuSelect");
-			showStat = true;
+			System.exit(0);
 
 		}
 
@@ -92,7 +93,7 @@ public class EndScreen implements KeyListener {	//KeyListener is like ActionList
 	}
 
 	public static void main(String[] args) {	//Call the graphics constructor
-		new EndScreen();
+		new EndScreen("link", "samus");
 	}
 
 
@@ -102,18 +103,10 @@ public class EndScreen implements KeyListener {	//KeyListener is like ActionList
 			super.paintComponent(g);	//Call paintComponent from the overlord JPanel
 			
 			if(!showStat) {
-				g.drawImage(backgroundImg,0,0, null);
-			}else {
-				g.setColor(new Color(34,33,34));
-				g.fillRect(0, 0, width, height);
-				g.setColor(new Color(255,255,255));
 				g.setFont(font);
-				g.drawString("WINNER:", 50, 100);
-				
-				g.setColor(new Color(200, 0,0));
-				g.drawRect(rectX, rectY, rectWidth, rectHeight);
-				g.drawRect(rectX+1, rectY+1, rectWidth-2, rectHeight-2);
-				g.drawRect(rectX-1, rectY-1, rectWidth+2, rectHeight+2);
+				g.drawImage(backgroundImg,0,0, null);
+				g.drawString("WINNER: "+winner, 10, 50);
+				g.drawString("LOSER: "+loser, 550, 50);
 			}
 		}
 	}
