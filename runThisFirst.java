@@ -1,3 +1,8 @@
+//Madhumita Mocharla and Matthew Xie
+//January 18 2020
+//Recreating supersmash for isu
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
