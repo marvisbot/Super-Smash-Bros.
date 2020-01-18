@@ -22,3 +22,6 @@ stats.
 
 Known Bugs:
 Unfinished end (stats) screen 
+Blocking action on character has very little effect 
+"mass" and "speed" variables on player objects are not used
+"mass" variables on weapons are not used
