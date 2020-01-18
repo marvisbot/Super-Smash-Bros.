@@ -27,6 +27,7 @@ public class Map{ //extends JPanel
 	public int getDifficulty() {
 		return difficulty;
 	}
+	
 	public Map(Image img, Platform[] platArr, int diff, String title) {
 		backgroundImage = img;
 		platformArray = platArr;
@@ -34,8 +35,6 @@ public class Map{ //extends JPanel
 		this.title = title;
 		this.spawnX = platArr[0].getPlatX();
 		this.spawnXLimit = platArr[0].getPlatWidth()+this.spawnX;
-		
-		
 	}
 	
 	public void draw(Graphics g, int x, int y, int width, int height) {
