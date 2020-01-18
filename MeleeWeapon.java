@@ -76,13 +76,14 @@ public class MeleeWeapon {
 	public Image getImg() {
 		return img;
 	}
-	
+	//Swings weapon down by turning image
 	public boolean swingDown() {
 		angle-=5;
 		if(angle <= 35+flipped) return true;
 		return false;
 	}
-	
+	//Swings weapon up by turning image
+
 	public boolean swingUp() {
 		angle+=5;
 		if(angle >= 90+flipped) return true;
